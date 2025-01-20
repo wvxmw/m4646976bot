@@ -25,7 +25,7 @@ const padWallet = {
       infoText: "прокладки",
       subFile: "padoutsubscribers.json",
    },
-   signs: "",
+   signs: "🔵🔵🔵",
 };
 
 (function mempoolSub(wallet) {
