@@ -82,16 +82,21 @@ const mainWallet = {
       if (response.type === "data") {
          const transers = response.payload.data.Tron.Transfers;
          for (let key in transers) {
-            if (transers[key].Contract.Address === contract_address && transers[key].Transfer.Receiver === wallet.address ) {
-					await bot.telegram.sendMessage(
-						mainChatId,
-						`${wallet.signs && wallet.signs + "\n"}Пополнение ${
-							wallet.deposit.infoText
-						}\nСумма: ${
-							stringValue(transers[key].Transfer.Amount.split(".")[0])
-						} USDT`
-					);
-				}
+            if (
+               transers[key].Contract.Address === contract_address &&
+               transers[key].Transfer.Receiver === wallet.address &&
+               Number(transers[key].Transfer.Amount.split(".")[0]) >=
+                  wallet.deposit.minAmount
+            ) {
+               await bot.telegram.sendMessage(
+                  mainChatId,
+                  `${wallet.signs && wallet.signs + "\n"}Пополнение ${
+                     wallet.deposit.infoText
+                  }\nСумма: ${stringValue(
+                     transers[key].Transfer.Amount.split(".")[0]
+                  )} USDT`
+               );
+            }
          }
       }
       // Handle keep-alive messages (ka)
