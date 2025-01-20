@@ -9,23 +9,24 @@ const contract_address = "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t";
 const mainChatId = "-1002253121294";
 const token = process.env.MEMPOOL_TOKEN;
 
-const mainWallet = {
-   address: "TNFm9JdGoj58wnkos742obF8mN4Xcm5n6X",
+const padWallet = {
+   address: "TAVU6HYWn5Rh85DqEcXTRLLXUt8eA34hCo",
    deposit: {
       id: "",
       timeStamp: "",
-      infoText: "эйфории",
-      subFile: "subscribers.json",
+      infoText: "прокладки",
+      subFile: "padsubscribers.json",
       minAmount: 1000,
       showFrom: false,
    },
    out: {
       id: "",
       timeStamp: "",
-      infoText: "",
-      subFile: "",
+      infoText: "прокладки",
+      subFile: "padoutsubscribers.json",
+      minAmount: 1000,
    },
-   signs: "🔴🔴🔴🔴🔴",
+   signs: "🔵🔵🔵🔵🔵",
 };
 
 (function mempoolSub(wallet) {
@@ -114,7 +115,7 @@ const mainWallet = {
    bitqueryConnection.on("error", (error) => {
       console.error("WebSocket Error:", error);
    });
-})(mainWallet);
+})(padWallet);
 
 bot.on("message", async (ctx) => {
    if (!ctx.message.text) return;
